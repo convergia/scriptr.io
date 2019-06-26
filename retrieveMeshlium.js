@@ -13,53 +13,56 @@ try {
     else {
         payload = JSON.parse(request.body);
         //log.info("HTTP");
-    	}
+        }
     log.info("Received the following payload:\n" + JSON.stringify(payload));
-	
-    var sensor = payload.sensor;
-
-    /*
-    payload example from meshlium: 
-    {"id":"88142","id_wasp":"MSK_SA","id_secret":"696418FDC337DE58","sensor":"PRES","value":"92867.91","datetime":"2019-05-29T16:11:20+00:00"}
     
-    payload.id
+
+    // Just for play with the format data	
+    //var sensor_str = JSON.stringify(payload.sensor);
+	var sensor = payload.sensor;
+
+	/*
+	payload example: 
+    {"id":"88142","id_wasp":"MSK_SA","id_secret":"696418FDC337DE58","sensor":"PRES","value":"92867.91","datetime":"2019-05-	29T16:11:20+00:00"}
+    
+	payload.id
     payload.id_wasp
     payload.id_secret
     payload.sensor
     payload.value
     payload.datetime
-    */    
+	*/    
 
-    // Discriminates the data by type of sensor and put it in dashboard
-    if(sensor == "BAT"){
-	    publish("responseChannel",{"id": "libelium_battery", "result": payload});
+	// Discriminates the data by type of sensor and put it in dashboard
+	if(sensor == "BAT"){
+		 publish("responseChannel",{"id": "meshlium_battery", "result": payload});
     }
     else if(sensor == "TC") {
-		publish("responseChannel",{"id": "libelium_temperature", "result": payload});
+		publish("responseChannel",{"id": "meshlium_temperature", "result": payload});
     }
     else if(sensor == "HUM") {
-        publish("responseChannel",{"id": "libelium_humidity", "result": payload});
+        publish("responseChannel",{"id": "meshlium_humidity", "result": payload});
     }
     else if(sensor == "PRES") {
-        publish("responseChannel",{"id": "libelium_pression", "result": payload});
+        publish("responseChannel",{"id": "meshlium_pression", "result": payload});
     }
     else if(sensor == "SOIL2") {
-        publish("responseChannel",{"id": "libelium_soil2", "result": payload});
+        publish("responseChannel",{"id": "meshlium_soil2", "result": payload});
     }
     else if(sensor == "PLV1") {
-        publish("responseChannel",{"id": "libelium_plv1", "result": payload});
+        publish("responseChannel",{"id": "meshlium_plv1", "result": payload});
     }    
 	else if(sensor == "PLV2") {
-        publish("responseChannel",{"id": "libelium_plv2", "result": payload});
+        publish("responseChannel",{"id": "meshlium_plv2", "result": payload});
     }    
     else if(sensor == "PLV3") {
-        publish("responseChannel",{"id": "libelium_plv3", "result": payload});
+        publish("responseChannel",{"id": "meshlium_plv3", "result": payload});
     }    
 	else if(sensor == "ANE") {
-        publish("responseChannel",{"id": "libelium_ane", "result": payload});
+        publish("responseChannel",{"id": "meshlium_ane", "result": payload});
     }    
 	else if(sensor == "WV") {
-        publish("responseChannel",{"id": "libelium_wv", "result": payload});
+        publish("responseChannel",{"id": "meshlium_wv", "result": payload});
     }    
 
 }
